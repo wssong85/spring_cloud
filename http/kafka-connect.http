@@ -1,0 +1,84 @@
+### jdbcSourceConnector
+POST 127.0.0.1:8083/connectors
+Content-Type: application/json
+
+{
+  "name": "my-source-connect",
+  "config": {
+    "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+    "connection.url": "jdbc:mysql://127.0.0.1:3306/myapp",
+    "connection.user": "root",
+    "connection.password": "1234",
+    "mode":"incrementing",
+    "incrementing.column.name": "id",
+    "table.whitelist": "users",
+    "topic.prefix": "my_topic_",
+    "tasks.max": 1
+  }
+}
+
+### jdbcSinkConnector
+POST 127.0.0.1:8083/connectors
+Content-Type: application/json
+
+{
+  "name": "my-sink-connect",
+  "config": {
+    "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+    "connection.url": "jdbc:mysql://127.0.0.1:3306/myapp",
+    "connection.user": "root",
+    "connection.password": "1234",
+    "auto.create": "true",
+    "auto.evolve": "true",
+    "delete.enabled": "false",
+    "tasks.max": "1",
+    "topics": "my_topic_users",
+    "errors.tolerance":"all"
+  }
+}
+
+### jdbcSinkConnector
+POST 127.0.0.1:8083/connectors
+Content-Type: application/json
+
+{
+  "name": "my-order-sink-connect",
+  "config": {
+    "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+    "connection.url": "jdbc:mysql://127.0.0.1:3306/myapp",
+    "connection.user": "root",
+    "connection.password": "1234",
+    "auto.create": "true",
+    "auto.evolve": "true",
+    "delete.enabled": "false",
+    "tasks.max": "1",
+    "topics": "orders",
+    "errors.tolerance":"all"
+  }
+}
+
+### plugins 확인
+GET http://localhost:8083/connector-plugins
+
+### 생성된 connector 확인1
+GET 127.0.0.1:8083/connectors
+Content-Type: application/json
+
+### 생성된 connector 확인2
+GET 127.0.0.1:8083/connectors/my-source-connect/status
+Content-Type: application/json
+
+### 생성된 connector 확인3
+GET 127.0.0.1:8083/connectors/my-sink-connect/status
+Content-Type: application/json
+
+### 생성된 connector 확인4
+GET 127.0.0.1:8083/connectors/my-order-sink-connect/status
+Content-Type: application/json
+
+### 커넥터 삭제 connector
+#DELETE 127.0.0.1:8083/connectors/my-sink-connect
+
+
+
+

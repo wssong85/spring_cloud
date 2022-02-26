@@ -1,0 +1,57 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: order-service
+  zipkin:
+    base-url: http://127.0.0.1:9411
+    enabled: true
+  slueth:
+    sampler: 1.0
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+      path: /h2-console
+  jpa:
+    hibernate:
+      properties:
+        dialect: org.hibernate.dialect.Mysql5InnoDBDialect
+      ddl-auto: update
+    show-sql: true
+  #    generate-ddl:
+  #    generate-ddl: true
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: 1234
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    dialect: org.hibernate.dialect.MySQL8Dialect
+#    url: jdbc:mysql://127.0.0.1:3306/myapp
+#    username: root
+#    password: 1234
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+
+logging:
+  level:
+    com.orderservice: DEBUG
+
+# actuator
+management:
+  endpoint:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, busrefresh, info, metrics, prometheus

@@ -1,0 +1,15 @@
+### first service - message
+GET http://localhost:8000/first-service/message
+Accept: application/json
+
+### first service - check
+GET http://localhost:8000/first-service/check
+Accept: application/json
+
+### second service
+GET http://localhost:8000/second-service/message
+Accept: application/json
+
+### second service - check
+GET http://localhost:8000/second-service/check
+Accept: application/json

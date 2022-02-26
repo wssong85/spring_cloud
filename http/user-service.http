@@ -1,0 +1,97 @@
+
+### encrypt 확인
+POST http://127.0.0.1:8888/encrypt
+#Content-Type: application/json
+#Authorization: Bearer {{authKey}}
+Content-Type: text/plain
+
+user_token_native_user_service
+
+### encrypt 확인
+POST http://127.0.0.1:8888/decrypt
+#Content-Type: application/json
+#Authorization: Bearer {{authKey}}
+Content-Type: text/plain
+
+AQAvLRCk/qufIs7LzMoLi8dgLhOd4qHiQWs8mePNu/VN405wY7U1OtfabNzAETitvsdQWakuuwFfSA1sYtGzEmB5l8K6NXzTozVqtvXy7qeEONzdDDpGNxJl95t5xBWNKAzLiyvcfuNCt1ah4Y77cBCwdTvxh6epYvRdC8OfppANLk36WS6dNw1xceBlLf646j2Zi+ICSzYqLtKvI8H9UAZ/AHIOshS1dHoQw7pmJX1C9QkjDdfhXASN9F6bPjDSYTUo8FRggQRrXlkXRwKoaBjNp3mmrPUXvwy3cWF2v3NdWc9RVjt1YrL6bxkpA4ibGYEXoBAxa1baW3m7Xz8hvmzTz0aZxwwSjv9Tw1E/Zg/Obw8tIXMeIJ3jM3uz344meNrQCN0ce6j/YL/BJyUjDviK
+
+###
+GET http://127.0.0.1:8000/user-service/welcome
+Content-Type: application/json
+Authorization: Bearer {{authKey}}
+
+###
+GET http://127.0.0.1:8000/user-service/health-check
+Content-Type: application/json
+Authorization: Bearer {{authKey}}
+
+###
+POST http://127.0.0.1:8000/user-service/actuator/refresh
+Content-Type: application/json
+Authorization: Bearer {{authKey}}
+
+###
+POST http://127.0.0.1:8000/user-service/actuator/busrefresh
+Content-Type: application/json
+Authorization: Bearer {{authKey}}
+
+### actuator refresh
+POST http://localhost:7043/actuator/refresh
+
+###
+POST http://127.0.0.1:8000/actuator/busrefresh
+Content-Type: application/json
+Authorization: Bearer {{authKey}}
+
+###
+POST http://127.0.0.1:8000/user-service/actuator/busrefresh
+Content-Type: application/json
+Authorization: Bearer {{authKey}}
+
+### create user 1
+POST http://127.0.0.1:8000/user-service/users
+Content-Type: application/json
+
+{
+  "email": "test1@email.com",
+  "name": "test1",
+  "pwd": "123"
+}
+
+### create user 2
+POST http://127.0.0.1:8000/user-service/users
+Content-Type: application/json
+
+{
+  "email": "test2@email.com",
+  "name": "test2",
+  "pwd": "123456789"
+}
+
+### login
+POST http://127.0.0.1:8000/user-service/login
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "test1@email.com",
+  "password": "123"
+}
+
+> {%
+ client.global.set("authKey", response.headers.valueOf("token"));
+
+ client.log("생성 authKey : " + client.global.get("authKey"))
+ %}
+
+### findByAll (user)
+GET http://127.0.0.1:8000/user-service/users
+Content-Type: application/json
+Authorization: Bearer {{authKey}}
+#Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwZDQ5MGEwYS04YWQwLTQ4YTItOTY2OC00YWYyZjAxNTc3MjEiLCJleHAiOjE2NDUzMjk5NDF9.9e6FYz8khk9W6d3D3HieYUbr_9Zr6oIjBysUvB9bNQW8F5e0C11HJXl0_dn0hRVoc9OJdUZa1nHWDjepVsECkA
+
+### findByUserId (user)
+GET http://127.0.0.1:8000/user-service/users/1638a459-f9ff-435a-9dfa-138c50f0c569
+Content-Type: application/json
+Authorization: Bearer {{authKey}}
+

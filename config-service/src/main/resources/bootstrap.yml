@@ -1,0 +1,6 @@
+encrypt:
+#  key: abcdegfhizklmnopqrstu123456789
+  key-store:
+    location: file:///E:/workspace/keystore/apiEncryptionKey.jks
+    password: test1234
+    alias: paiEncryptionKey

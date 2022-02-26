@@ -1,0 +1,35 @@
+###
+GET http://localhost:8000/order-service/health-check
+Content-Type: application/json
+
+// userId: 618e055e-6752-4c13-99bf-da14dcfebab5
+// CATALOG-001
+// orderId: 56f5a9ea-d821-4288-b4de-ac572e0afa2f
+###
+POST http://localhost:8000/order-service/1638a459-f9ff-435a-9dfa-138c50f0c569/orders
+Content-Type: application/json
+
+{
+  "productId": "CATALOG-002",
+  "qty":"10",
+  "unitPrice": "1000"
+}
+
+
+###
+#{
+#  "productId": "CATALOG-003",
+#  "qty":"10",
+#  "unitPrice": "2000"
+#}
+
+#ID  	CREATED_AT  	PRODUCT_ID  	PRODUCT_NAME  	STOCK  	UNIT_PRICE
+#1	2022-02-21 22:51:52.396	CATALOG-001	Berlin	100	1500
+#2	2022-02-21 22:51:52.396	CATALOG-002	Tokyo	110	1000
+#3	2022-02-21 22:51:52.396	CATALOG-003	StockHolm	120	2000
+
+###
+GET http://localhost:8000/order-service/c1d25b69-90a6-4224-aa7e-cb7634e08f69/orders
+Content-Type: application/json
+
+

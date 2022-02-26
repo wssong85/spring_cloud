@@ -1,0 +1,34 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-service
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: admin
+    password: 1234
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:///E:\\workspace\\native-file-repo
+        git:
+          uri: https://github.com/wssong85/spring-cloud-config
+#          uri: file:///E:\\workspace\\git-local-repo
+          default-label: master
+          # linux
+#          uri: file:///workspace/git-local-repo
+#           window
+#          uri: file:///E:\\workspace\\git-local-repo
+#          skipSslValidation: true
+#          clone-on-start: true
+# actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, busrefresh

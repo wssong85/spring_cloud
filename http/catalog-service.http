@@ -1,0 +1,7 @@
+###
+GET http://localhost:8000/catalog-service/health-check
+Content-Type: application/json
+
+###
+GET http://localhost:8000/catalog-service/catalogs
+Content-Type: application/json
